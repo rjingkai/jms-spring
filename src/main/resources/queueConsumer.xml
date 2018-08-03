@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <import resource="common.xml"></import>
+
+    <!-- 定义自己写的监听器 -->
+    <bean id="consumerListener" class="com.rjk.pub.ConsumerListense"></bean>
+
+    <!-- 定义jms监听容器 -->
+    <bean id="jmsContain" class="org.springframework.jms.listener.DefaultMessageListenerContainer">
+        <property name="connectionFactory" ref="connectionFactory"></property>
+        <property name="destination" ref="queueDestination"></property>
+        <property name="messageListener" ref="consumerListener"></property>
+    </bean>
+</beans>
